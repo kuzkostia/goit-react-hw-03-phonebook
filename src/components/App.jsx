@@ -20,26 +20,18 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    const savedContacts = localStorage.getItem(CONTACTS); // отримуємо дані з localStorage
-
-    // якщо контакти є, то парсимо і записуємо в стейт
+    const savedContacts = localStorage.getItem(CONTACTS);
     if (savedContacts !== null) {
       const parsedContacts = JSON.parse(savedContacts);
       this.setState({ contacts: parsedContacts });
     } else {
-      this.setState({ contacts: initContacts }); // якщо немає, то записуємо початковий масив
+      this.setState({ contacts: initContacts });
     }
   }
 
-  // Метод життєвого циклу, який викликається після оновлення стейту.
-  // _ цей перший аргумент не використовується в коді.
   componentDidUpdate(_, prevState) {
-    // якщо контакти змінились, то записуємо їх в localStorage
     if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem(
-        CONTACTS,
-        JSON.stringify(this.state.contacts) // перетворюємо масив в JSON
-      );
+      localStorage.setItem(CONTACTS, JSON.stringify(this.state.contacts));
     }
   }
 
